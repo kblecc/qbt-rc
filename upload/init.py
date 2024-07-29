@@ -20,15 +20,15 @@ Download_dir=conf["Download_dir"]
 
 if __name__ == '__main__':
 
-    #检查qb配置
+    # Qbittorrent Config Check
     qbt_client = qbittorrentapi.Client(host=QB_host, port=QB_port, username=QB_username, password=QB_password)
     try:
         qbt_client.auth_log_in()
-        print("ssuccess!!! qb连接成功，配置正确")
+        print("Success: Qbittorrent Connected")
     except qbittorrentapi.LoginFailed as e:
-        print(f"error!!! qb配置不正确，请检查配置,错误信息：{e}")
+        print(f"Error: Login Failed, {e}")
     except:
-        print(f"error!!! qb配置不正确，请检查配置")
+        print(f"Error: Config Error")
 
 
     if Telegram_bot_api !="":
@@ -36,7 +36,7 @@ if __name__ == '__main__':
             log="hello world"
             bot = telebot.TeleBot(Telegram_bot_api)
             bot.send_message(chat_id=Telegram_user_id,text=log,parse_mode='Markdown')
-            print(f"ssuccess!!! telegram配置成功，前检查机器人消息")
+            print(f"Success: Telegram Bot Connected")
         except:
-            print(f"error!!! telegram配置不正确，请检查配置")
+            print(f"Error: Telegram Bot Config")
 

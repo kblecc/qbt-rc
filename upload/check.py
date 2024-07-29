@@ -59,25 +59,24 @@ def send_telegram(upload_dir,upload_time,row):
         Torrents_size=row[7]
         m, s = divmod(int(upload_time), 60)
         h, m = divmod(m, 60)
-        #print ("%02d时%02d分%02d秒" % (h, m, s))
+        #print ("%02dh%02dm%02ds" % (h, m, s))
         if h !=0 :
-            last_time="%d时%d分%d秒" % (h, m, s)
+            last_time="%dh%dm%ds" % (h, m, s)
         elif h==0 and m!=0:
-            last_time="%d分%d秒" % ( m, s)
+            last_time="%dm%ds" % ( m, s)
         else:
-            last_time="%d秒" % s
+            last_time="%ds" % s
         bot = telebot.TeleBot(Telegram_bot_api)
-        log = f"种子名称：`{Torrents_name}`\n" \
-              f"种子类别：`{Torrents_category}`\n" \
-              f"种子标签：`{Torrents_tag}`\n" \
-              f"内容路径：`{Torrents_content_dir}`\n" \
-              f"根目录：`{Torrents_root_dir}`\n" \
-              f"保存路径：`{Torrents_save_dir}`\n" \
-              f"文件数：`{Torrents_num}`\n" \
-              f"文件大小：`{hum_convert(Torrents_size)}`\n" \
-              f"HASH:`{Torrents_hash}`\n" \
-              f"上传地址:`{upload_dir}`\n" \
-              f"上传用时:`{last_time}`\n"
+        log = f"Server： `{conf["Server_Name"]}`\n" \
+	        f"Title:  `{Torrents_name}`\n" \
+              f"Category:  `{Torrents_category}`\n" \
+              f"Tag:  `{Torrents_tag}`\n" \
+              f"No. of file:  `{Torrents_num}`\n" \
+              f"Size:  `{hum_convert(Torrents_size)}`\n" \
+              f"Hash:  `{Torrents_hash}`\n" \
+              f"Uploaded to:  `{upload_dir}`\n" \
+              f"Duration:  `{last_time}`\n"
+
         bot.send_message(chat_id=Telegram_user_id,text=log,parse_mode='Markdown')
 
     else:

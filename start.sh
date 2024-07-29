@@ -1,7 +1,7 @@
 #!/bin/bash
 
 
-# 检查config配置文件，并创建
+# check and create Qbittorrent config
 if [ ! -e "/config/qBittorrent/config/qBittorrent.conf" ] ;  then 
 mkdir -p /config/qBittorrent/config/
 cp /usr/local/qbittorrent/defaults/qBittorrent.conf  /config/qBittorrent/config/qBittorrent.conf
@@ -11,11 +11,11 @@ fi
 chown 0777 -R /config \
     /downloads
 
-git clone https://github.com/666wcy/qbittorrent_python_rclone
+git clone https://github.com/kblecc/qbt-rc
 chmod 0777 /upload
-mv  -n /qbittorrent_python_rclone/upload/* /upload/
+mv  -n /qbt-rc/upload/* /upload/
 chmod 0777 /upload/ -R
-rm -rf /qbittorrent_python_rclone
+rm -rf /qbt-rc
 
 
 nohup yes "" | qbittorrent-nox --webui-port=$PORT  --profile=/config  &
